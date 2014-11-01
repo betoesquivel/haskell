@@ -30,3 +30,19 @@ obtenMayores V valor = []
 obtenMayores (A l v r)  valor   
     | v > valor = [v] ++ (obtenMayores l valor) ++ (obtenMayores r valor)
     | otherwise = (obtenMayores r valor)
+
+
+bolos :: Integer -> [[Integer]]
+bolos 0 = [[]]
+bolos 1 = [[1]]
+bolos 3 = bolos 1 ++ [[2, 3]]
+bolos 6 = bolos 3 ++ [[4, 5, 6]]
+bolos 10 = bolos 6 ++ [[7, 8, 9, 10]]
+bolos n
+    | n > 6 = bolos 6 ++ [ bolosaux 7 n ]
+    | n > 3 = bolos 3 ++ [ bolosaux 4 n ]
+    | n > 1 = bolos 1 ++ [ bolosaux 2 n ]
+    | otherwise = [[]]
+
+bolosaux :: Integer -> Integer -> [Integer] 
+bolosaux x n = if x <= n then x : ( bolosaux (x+1) n ) else []
