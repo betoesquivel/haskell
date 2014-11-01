@@ -49,3 +49,7 @@ obtenMayores (A l v r)  valor
     | otherwise = (obtenMayores r valor)
 
 
+--8. Implementar la función no-recursiva f_prodpar en Haskell que utilizando la FOS
+--(funciones de orden superior) cree una lista con los productos de los elementos de las
+--listas de tamaño impar. 
+f_prodpar = (\lista  -> [ product l | l <- lista, odd(length l) ] )
