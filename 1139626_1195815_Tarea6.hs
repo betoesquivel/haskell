@@ -31,7 +31,7 @@ repite n = [1] ++ repite (n - 1)
 --3. Implementar la función recursiva bolos que genere el patrón de acomodo
 --común para N bolos. La última línea de bolos puede quedar incompleta!
 bolos :: Integer -> [[Integer]]
-bolos 0 = [[]]
+bolos 0 = []
 bolos 1 = [[1]]
 bolos 3 = bolos 1 ++ [[2, 3]]
 bolos 6 = bolos 3 ++ [[4, 5, 6]]
@@ -61,16 +61,16 @@ ab = A (A (A V 2 V)
             V))
 
 
-obtenMayores :: AB Integer -> Integer -> [Integer] 
-obtenMayores V valor = []
-obtenMayores (A l v r)  valor   
-    | v > valor = [v] ++ (obtenMayores l valor) ++ (obtenMayores r valor)
-    | otherwise = (obtenMayores r valor)
+obten_mayores :: AB Integer -> Integer -> [Integer] 
+obten_mayores V valor = []
+obten_mayores (A l v r)  valor   
+    | v > valor = [v] ++ (obten_mayores l valor) ++ (obten_mayores r valor)
+    | otherwise = (obten_mayores r valor)
 
 
 --5. Implementar la función internos en Haskell que dado un árbol binario regrese una
 --lista con los valores que se encuentran en los nodos internos del árbol 
-internos :: AB Int -> [Int]
+internos :: AB Integer -> [Integer]
 internos V = []
 internos (A V t V) = []
 internos (A i t e) = [t] ++ internos i ++ internos e
@@ -92,8 +92,8 @@ g_distintos_aux l1@(el:ls) l2
 --7. Implementar la función no-recursiva c_tabla en Haskell que utilizando 
 --"comprensión de listas" obtenga la tabla de multiplicar especificada. Los 
 --elementos de la tabla deben aparecer en tuplas. 
-c_tablas :: Int -> [((Int, Int), Int)]
-c_tablas n = [((n, x), n * x) | x <- [1..10]]
+c_tabla :: Int -> [((Int, Int), Int)]
+c_tabla n = [((n, x), n * x) | x <- [1..10]]
 
 --8. Implementar la función no-recursiva f_prodpar en Haskell que utilizando la FOS
 --(funciones de orden superior) cree una lista con los productos de los elementos de las
