@@ -1,5 +1,24 @@
 -- Haskell homework for our Programming Languages Class
 
+--1. Implementar la función recursiva distintos que liste los elementos distintos
+--que pertenecen a dos listas. Asumir que los elementos no se repiten dentro de la
+--misma lista.
+contiene :: (Eq a) => [a] -> a -> Bool
+contiene [] el = False
+contiene (x : xs) el
+        | x == el = True
+        | otherwise = contiene xs el
+
+distintos :: (Eq a) => [a] -> [a] -> [a]
+distintos list1 list2 = distintos_aux list1 list2 [] []
+ 
+distintos_aux :: (Eq a) => [a] -> [a] -> [a] -> [a] -> [a]
+distintos_aux [] [] rep res = res
+distintos_aux [] list2 rep res = distintos_aux list2 [] rep res
+distintos_aux (x : xs) list2 rep res
+        | contiene xs x || contiene list2 x || contiene res x || contiene rep x = distintos_aux xs list2 (rep ++ [x]) res
+        | otherwise = distintos_aux xs list2 rep (res ++ [x])
+ 
 --2. Implementar la función recursiva multiplica que obtenga una lista de 1’s que 
 --represente el resultado en unario de multiplicar dos enteros no negativos en decimal. 
 multiplica :: Integer -> Integer -> [Integer] 
@@ -49,7 +68,36 @@ obtenMayores (A l v r)  valor
     | otherwise = (obtenMayores r valor)
 
 
+--5. Implementar la función internos en Haskell que dado un árbol binario regrese una
+--lista con los valores que se encuentran en los nodos internos del árbol 
+internos :: AB Int -> [Int]
+internos V = []
+internos (A V t V) = []
+internos (A i t e) = [t] ++ internos i ++ internos e
+
+--6. Implementar la función recursiva g_distintos que utilizando guardias liste
+--los elementos que pertenecen a dos listas. 
+g_distintos :: (Eq a) => [a] -> [a] -> [a]
+g_distintos l1 l2 = g_distintos_aux l1 l2 ++ g_distintos_aux l2 l1
+
+g_distintos_aux :: (Eq a) => [a] -> [a] -> [a]
+g_distintos_aux [] _ = []
+g_distintos_aux l1@(el:ls) l2
+    | l2 == [] = l1
+    | contiene l2 el = g_distintos_aux ls l2 
+    | otherwise = el : g_distintos_aux ls l2
+
+
+
+--7. Implementar la función no-recursiva c_tabla en Haskell que utilizando 
+--"comprensión de listas" obtenga la tabla de multiplicar especificada. Los 
+--elementos de la tabla deben aparecer en tuplas. 
+c_tablas :: Int -> [((Int, Int), Int)]
+c_tablas n = [((n, x), n * x) | x <- [1..10]]
+
 --8. Implementar la función no-recursiva f_prodpar en Haskell que utilizando la FOS
 --(funciones de orden superior) cree una lista con los productos de los elementos de las
 --listas de tamaño impar. 
 f_prodpar = (\lista  -> [ product l | l <- lista, odd(length l) ] )
+
+
