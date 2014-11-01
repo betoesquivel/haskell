@@ -1,4 +1,6 @@
 -- Haskell homework for our Programming Languages Class
+-- 1139626 José Alberto Esquivel 
+-- 1195815 Eduardo Sánchez
 
 --1. Implementar la función recursiva distintos que liste los elementos distintos
 --que pertenecen a dos listas. Asumir que los elementos no se repiten dentro de la
